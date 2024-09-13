@@ -64,5 +64,6 @@ class DefaultFirebaseOptions {
     projectId: 'authentication-a8e04', // exaustor-2e5f2
     storageBucket: 'authentication-a8e04.appspot.com', // exaustor-2e5f2.appspot.com
     appId: '1:187030371315:ios:c96acf5e501f45b08d7086', // 1:312417997266:ios:03a9476a6ac1c74133f80b
+    
   );
 }
