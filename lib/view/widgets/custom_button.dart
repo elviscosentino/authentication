@@ -6,6 +6,27 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+        onPressed: onTap,
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Login",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.white
+                ),
+              ),
+            ],
+          ),
+        )),
+    );
     return InkWell(
       onTap: onTap,
       child: Padding(

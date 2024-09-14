@@ -18,7 +18,18 @@ samples, guidance on mobile development, and a full API reference.
 Para gerar o sha1 e sha256 key: (necessários para autenticação pelo Google ou Phone) (email/senha não precisa)
 keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
 
-Autenticação Google no iPhone:
+Pelo menos nos métodos de autenticação, precisa ser feito o ajuste abaixo.
+
+No Android:
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+<application
+android:label="MyApp"
+android:icon="@mipmap/ic_launcher"
+android:enableOnBackInvokedCallback="true"> <!-- Aqui você adiciona -->
+
+
+Autenticação Google ou Celular no iPhone:
 Navegue até o arquivo ios/Runner/Info.plist.
 Adicione o REVERSED_CLIENT_ID ao arquivo conforme abaixo: (pegar no GoogleService-Info.plist)
 <key>CFBundleURLTypes</key>

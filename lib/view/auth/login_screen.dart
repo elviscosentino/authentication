@@ -1,14 +1,14 @@
-import 'package:authentication/auth_google.dart';
-import 'package:authentication/custom_button.dart';
-import 'package:authentication/forgot_password.dart';
-import 'package:authentication/phone_login.dart';
-import 'package:authentication/signup_screen.dart';
-import 'package:authentication/snackbar.dart';
+import 'package:authentication/controller/auth/auth_google.dart';
+import 'package:authentication/view/widgets/custom_button.dart';
+import 'package:authentication/view/auth/forgot_password.dart';
+import 'package:authentication/view/auth/phone_login.dart';
+import 'package:authentication/view/auth/signup_screen.dart';
+import 'package:authentication/view/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 
-import 'authentication.dart';
-import 'custom_textfield.dart';
-import 'home_screen.dart';
+import '../../controller/auth/authentication.dart';
+import '../widgets/custom_textfield.dart';
+import '../home_screen.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
   @override
@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         isLoading = false;
       });
-      showSnackBar(context, res);
+      showSnackBar(context, res, Colors.red);
     }
   }
 
@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 children: [
                   Expanded(child: Container(height: 1, color: Colors.black45)),
-                  const Text("  or  "),
+                  const Text("  ou  "),
                   Expanded(child: Container(height: 1, color: Colors.black45))
                 ],
               ),

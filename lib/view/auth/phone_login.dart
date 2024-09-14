@@ -1,5 +1,5 @@
-import 'package:authentication/phone_otp.dart';
-import 'package:authentication/snackbar.dart';
+import 'package:authentication/view/auth/phone_otp.dart';
+import 'package:authentication/view/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class PhoneAuthentication extends StatefulWidget {
@@ -89,9 +89,13 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                           setState(() {
                             isLoading = true;
                           });
-                          await FirebaseAuth.instance.verifyPhoneNumber(
+                          final FirebaseAuth auth = FirebaseAuth.instance;
+                          await auth.verifyPhoneNumber(
                             phoneNumber: phoneController.text,
-                            verificationCompleted: (phoneAuthCredential){},
+                            verificationCompleted: (credential) async {
+                              await auth.signInWithCredential(credential);
+                              print("Login com sucesso!");
+                            },
                             verificationFailed: (error){
                               print(error);
                             },

@@ -55,6 +55,8 @@ class DefaultFirebaseOptions {
     storageBucket: 'authentication-a8e04.appspot.com', // exaustor-2e5f2.appspot.com
     appId: '1:187030371315:android:40031a413207e9cf8d7086', // 1:312417997266:android:6ed21c27402ff48c33f80b
     apiKey: 'AIzaSyC5nu46lpdZ9ediM2DKzb_jg_WYVZgi3W0', // AIzaSyCwVExsnisMVfq2Tsit9IsfeUXKttQ5sXs
+    //databaseURL: 'SUA_DATABASE_URL',
+    //gcmSenderId: 'SEU_GCM_SENDER_ID',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -64,6 +66,9 @@ class DefaultFirebaseOptions {
     projectId: 'authentication-a8e04', // exaustor-2e5f2
     storageBucket: 'authentication-a8e04.appspot.com', // exaustor-2e5f2.appspot.com
     appId: '1:187030371315:ios:c96acf5e501f45b08d7086', // 1:312417997266:ios:03a9476a6ac1c74133f80b
-    
+    //databaseURL: 'SUA_DATABASE_URL',
+    //iosClientId: 'SEU_IOS_CLIENT_ID',
+    //androidClientId: 'SEU_ANDROID_CLIENT_ID',
+    //deepLinkURLScheme: 'SUA_DEEPLINK_URL_SCHEME',
   );
 }

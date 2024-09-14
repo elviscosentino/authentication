@@ -1,11 +1,11 @@
-import 'package:authentication/authentication.dart';
-import 'package:authentication/login_screen.dart';
-import 'package:authentication/snackbar.dart';
+import 'package:authentication/controller/auth/authentication.dart';
+import 'package:authentication/view/auth/login_screen.dart';
+import 'package:authentication/view/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 
-import 'custom_button.dart';
-import 'custom_textfield.dart';
-import 'home_screen.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_textfield.dart';
+import '../home_screen.dart';
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
@@ -44,7 +44,7 @@ class _SignupScreenState extends State<SignupScreen> {
       setState(() {
         isLoading = false;
       });
-      showSnackBar(context, res);
+      showSnackBar(context, res, Colors.red);
     }
   }
   @override

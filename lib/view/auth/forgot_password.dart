@@ -1,4 +1,4 @@
-import 'package:authentication/snackbar.dart';
+import 'package:authentication/view/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class ForgotPassword extends StatefulWidget {
@@ -81,10 +81,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         await auth
                           .sendPasswordResetEmail(email: emailController.text)
                           .then((value){
-                            showSnackBar(context, "Enviamos um link de reset para o seu e-mail, por favor verifique.");
+                            showSnackBar(context, "Enviamos um link de reset para o seu e-mail, por favor verifique.", Colors.green);
                           })
                           .onError((error, stackTrace){
-                            showSnackBar(context, error.toString());
+                            showSnackBar(context, error.toString(), Colors.red);
                           });
                         Navigator.pop(context);
                         emailController.clear();
