@@ -1,21 +1,19 @@
-import 'package:authentication/controller/auth/authentication.dart';
-import 'package:authentication/view/auth/login_screen.dart';
-import 'package:authentication/view/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/custom_button.dart';
 import '../widgets/custom_textfield.dart';
-import '../home_screen.dart';
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
-
+import '../home/home_screen.dart';
+import '../../controller/auth/auth_email.dart';
+import 'login_screen.dart';
+import '../widgets/snackbar.dart';
+class EmailSignupScreen extends StatefulWidget {
+  const EmailSignupScreen({super.key});
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<EmailSignupScreen> createState() => _EmailSignupScreenState();
 }
-
-class _SignupScreenState extends State<SignupScreen> {
+class _EmailSignupScreenState extends State<EmailSignupScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController password2Controller = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   bool isLoading = false;
 

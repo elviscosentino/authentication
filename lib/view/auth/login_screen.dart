@@ -1,14 +1,15 @@
 import 'package:authentication/controller/auth/auth_google.dart';
 import 'package:authentication/view/widgets/custom_button.dart';
-import 'package:authentication/view/auth/forgot_password.dart';
+import 'package:authentication/view/auth/email_forgot_password.dart';
 import 'package:authentication/view/auth/phone_login.dart';
-import 'package:authentication/view/auth/signup_screen.dart';
+import 'package:authentication/view/auth/email_signup_screen.dart';
 import 'package:authentication/view/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 
-import '../../controller/auth/authentication.dart';
+import '../../controller/auth/auth_email.dart';
+import '../../services/utils.dart';
 import '../widgets/custom_textfield.dart';
-import '../home_screen.dart';
+import '../home/home_screen.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
   @override
@@ -19,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
+
 
   @override
   void dispose(){
@@ -53,7 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SizedBox(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -67,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: "Digite seu e-mail",
                 icon: Icons.email,
               ),
+              const SizedBox(height: 12),
               CustomTextfield(
                 textEditingController: passwordController,
                 hintText: "Digite sua senha",
@@ -74,67 +78,70 @@ class _LoginScreenState extends State<LoginScreen> {
                 icon: Icons.lock,
               ),
               const ForgotPassword(),
-              CustomButton(onTap: loginUser, text: "Login"),
-              Row(
-                children: [
-                  Expanded(child: Container(height: 1, color: Colors.black45)),
-                  const Text("  ou  "),
-                  Expanded(child: Container(height: 1, color: Colors.black45))
-                ],
+              const SizedBox(height: 12),
+              CustomButton(
+                onTap: loginUser,
+                text: "Login"
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
-                  onPressed: () async {
-                    bool res = await FirebaseServices().signInWithGoogle();
-                    print(res);
-                    if (res) {
-                      Navigator.pushReplacement(context, MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
-                    }
-                  },
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Image.network("https://ouch-cdn2.icons8.com/VGHyfDgzIiyEwg3RIll1nYupfj653vnEPRLr0AeoJ8g/rs:fit:456:456/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODg2/LzRjNzU2YThjLTQx/MjgtNGZlZS04MDNl/LTAwMTM0YzEwOTMy/Ny5wbmc.png",
-                          height: 35,
-                        ),
-                      ),
-                      const Text("  Continuar com o Google",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white
-                        ),
-                      )
-                    ],
-                  )
-                )
-              ),
-              PhoneAuthentication(),
-              Padding(
-                padding: const EdgeInsets.only(top: 10, left: 100),
+              SizedBox(
+                height: 32,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Não tem cadastro?", style: TextStyle(fontSize: 16),),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const SignupScreen())
-                        );
-                      },
-                      child: const Text(
-                        " Cadastrar",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16
-                        ),
+                    Expanded(child: Container(height: 1, color: Colors.black45)),
+                    const Text("  ou  "),
+                    Expanded(child: Container(height: 1, color: Colors.black45))
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
+                onPressed: () async {
+                  bool res = await FirebaseServices().signInWithGoogle();
+                  print(res);
+                  if (res) {
+                    Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+                  }
+                },
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Image.network("https://ouch-cdn2.icons8.com/VGHyfDgzIiyEwg3RIll1nYupfj653vnEPRLr0AeoJ8g/rs:fit:456:456/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODg2/LzRjNzU2YThjLTQx/MjgtNGZlZS04MDNl/LTAwMTM0YzEwOTMy/Ny5wbmc.png",
+                        height: 30,
+                      ),
+                    ),
+                    const Text("  Continuar com o Google",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.white
                       ),
                     )
                   ],
-                ),
+                )
+              ),
+              const SizedBox(height: 16),
+              const PhoneAuthentication(),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Text("Não tem cadastro?", style: TextStyle(fontSize: 16),),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const EmailSignupScreen())
+                      );
+                    },
+                    child: const Text(
+                      " Cadastrar",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16
+                      ),
+                    ),
+                  )
+                ],
               )
             ],
           ),

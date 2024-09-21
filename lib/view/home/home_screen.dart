@@ -1,5 +1,5 @@
 import 'package:authentication/controller/auth/auth_google.dart';
-import 'package:authentication/controller/auth/authentication.dart';
+import 'package:authentication/controller/auth/auth_email.dart';
 import 'package:authentication/view/widgets/custom_button.dart';
 import 'package:authentication/view/auth/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';

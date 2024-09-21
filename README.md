@@ -35,9 +35,30 @@ Adicione o REVERSED_CLIENT_ID ao arquivo conforme abaixo: (pegar no GoogleServic
 <key>CFBundleURLTypes</key>
 <array>
   <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
     <key>CFBundleURLSchemes</key>
     <array>
-        <string>YOUR_REVERSED_CLIENT_ID</string>
+      <string>YOUR_REVERSED_CLIENT_ID</string>
     </array>
   </dict>
 </array>
+
+
+No arquivo Podfile na raiz do ios, precisa estar assim no início:
+# Uncomment this line to define a global platform for your project
+platform :ios, '13.0'
+
+
+Depois dos packages já importados no pubspec.yaml, rodar o comando no terminal
+de dentro da pasta ios:
+pod install --repo-update
+
+---------------------------------------------
+
+No Firebase, além de ativar os respectivos tipos de Autenticação, ajustar a linguagem dos textos
+tanto de redefinição de senha de email quanto mensagens sms com o código.
+Visão geral do projeto -> Configurações do projeto
+Em Geral, alterar o "Nome exibido ao publico" para o nome que vai aparecer em %APP_NAME%.
+Para a linguagem, vá em Authentication -> Modelos
+E altere o idioma do modelo.

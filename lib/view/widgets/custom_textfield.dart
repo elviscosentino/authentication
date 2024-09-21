@@ -15,33 +15,30 @@ class CustomTextfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: TextField(
-        controller: textEditingController,
-        obscureText: isPass,
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: const TextStyle(
-            color: Colors.black45,
-            fontSize: 18
+    return TextField(
+      controller: textEditingController,
+      obscureText: isPass,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: const TextStyle(
+          color: Colors.black45,
+          fontSize: 18
+        ),
+        prefixIcon: Icon(icon, color: Colors.black45,),
+        contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        border: InputBorder.none,
+        filled: true,
+        fillColor: const Color(0xFFedf0f8),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(15)
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 2,
+            color: Colors.blue
           ),
-          prefixIcon: Icon(icon, color: Colors.black45,),
-          contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          border: InputBorder.none,
-          filled: true,
-          fillColor: const Color(0xFFedf0f8),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(30)
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              width: 2,
-              color: Colors.blue
-            ),
-            borderRadius: BorderRadius.circular(30)
-          ),
+          borderRadius: BorderRadius.circular(15)
         ),
       ),
     );

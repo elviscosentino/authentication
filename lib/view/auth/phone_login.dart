@@ -14,28 +14,25 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-          onPressed: (){
-            myDialogBox(context);
-          },
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Image.network("https://static.vecteezy.com/system/resources/thumbnails/010/829/986/small/phone-icon-in-trendy-flat-style-free-png.png",
-                  height: 32,
-                  color: Colors.white,
-                ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+        onPressed: (){
+          myDialogBox(context);
+        },
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Image.network("https://static.vecteezy.com/system/resources/thumbnails/010/829/986/small/phone-icon-in-trendy-flat-style-free-png.png",
+                height: 28,
+                color: Colors.white,
               ),
-              const Text("  Login com celular",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
-              )
-            ],
-          ),
-      ),
+            ),
+            const Text("  Login/cadastro com celular",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+            )
+          ],
+        ),
     );
   }
 

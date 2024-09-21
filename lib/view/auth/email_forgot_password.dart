@@ -13,21 +13,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 35),
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: InkWell(
-          onTap: () {
-            myDialogBox(context);
-          },
-          child: const Text(
-            "Esqueceu a senha?",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.blue
-            ),
+    return Align(
+      alignment: Alignment.centerRight,
+      child: InkWell(
+        onTap: () {
+          myDialogBox(context);
+        },
+        child: const Text(
+          "Esqueceu a senha?",
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.blue
           ),
         ),
       ),
