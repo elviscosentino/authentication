@@ -62,3 +62,32 @@ Visão geral do projeto -> Configurações do projeto
 Em Geral, alterar o "Nome exibido ao publico" para o nome que vai aparecer em %APP_NAME%.
 Para a linguagem, vá em Authentication -> Modelos
 E altere o idioma do modelo.
+
+-------------------------------
+Informações sobre o Get:
+
+Get.to(): Navega para uma nova página, adicionando-a à pilha de navegação.
+Get.to(NewPage());
+
+Get.off(): Navega para uma nova página e remove a página anterior da pilha.
+Get.off(NewPage());
+
+Get.offAll(): Navega para uma nova página e remove todas as páginas anteriores da pilha.
+Get.offAll(NewPage());
+
+Get.back(): Retorna para a página anterior.
+
+Get.offNamed(): Navega para uma nova página com base no nome da rota, removendo a página anterior da pilha.
+Get.offNamed('/newPage');
+
+Get.offAllNamed(): Navega para uma nova página com base no nome da rota e remove todas as páginas anteriores da pilha.
+Get.offAllNamed('/home');
+
+Get.toNamed(): Navega para uma nova página usando o nome da rota.
+Get.toNamed('/newPage');
+
+Get.backUntil(): Volta até encontrar uma página específica na pilha.
+Get.backUntil((route) => route.isFirst);
+
+Get.offUntil(): Navega para uma nova página e remove todas as páginas até uma condição específica.
+Get.offUntil(MaterialPageRoute(builder: (_) => NewPage()), (route) => route.isFirst);

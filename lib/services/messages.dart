@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Utils {
+class Messages {
   void showToast({required String msg, bool isError = false, bool isSuccess = false, ToastGravity toastGravity = ToastGravity.BOTTOM}){
     Fluttertoast.showToast(
         msg: msg,
@@ -11,6 +11,16 @@ class Utils {
         backgroundColor: isError ? Colors.red : isSuccess ? Colors.green : Colors.grey,
         textColor: isError ? Colors.white : isSuccess ? Colors.black : Colors.black,
         fontSize: 14
+    );
+  }
+
+  showSnackBar(BuildContext context, String text, Color color){
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: color,
+        elevation: 10,
+        content: Text(text, style: const TextStyle(fontWeight: FontWeight.w500),)
+      )
     );
   }
 }

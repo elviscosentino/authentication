@@ -1,149 +1,159 @@
-import 'package:authentication/controller/auth/auth_google.dart';
-import 'package:authentication/view/widgets/custom_button.dart';
-import 'package:authentication/view/auth/email_forgot_password.dart';
-import 'package:authentication/view/auth/phone_login.dart';
-import 'package:authentication/view/auth/email_signup_screen.dart';
-import 'package:authentication/view/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
-
-import '../../controller/auth/auth_email.dart';
-import '../../services/utils.dart';
+import 'package:get/get.dart';
+import '../app_pages.dart';
+import '../widgets/custom_button.dart';
 import '../widgets/custom_textfield.dart';
-import '../home/home_screen.dart';
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  bool isLoading = false;
-
-
-  @override
-  void dispose(){
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-  }
-
-  void loginUser() async {
-    String res = await Authentication().loginUser(
-        email: emailController.text,
-        password: passwordController.text,
-    );
-    if (res == "sucesso"){
-      setState(() {
-        isLoading = false;
-      });
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen())
-      );
-    }else{
-      setState(() {
-        isLoading = false;
-      });
-      showSnackBar(context, res, Colors.red);
-    }
-  }
-
+import '../auth/email_forgot_password.dart';
+import '../../controller/auth/auth_controller.dart';
+import '../../services/validators.dart';
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: height / 3.1,
-                child: Image.asset("assets/login.jpg"),
-              ),
-              CustomTextfield(
-                textEditingController: emailController,
-                hintText: "Digite seu e-mail",
-                icon: Icons.email,
-              ),
-              const SizedBox(height: 12),
-              CustomTextfield(
-                textEditingController: passwordController,
-                hintText: "Digite sua senha",
-                isPass: true,
-                icon: Icons.lock,
-              ),
-              const ForgotPassword(),
-              const SizedBox(height: 12),
-              CustomButton(
-                onTap: loginUser,
-                text: "Login"
-              ),
-              SizedBox(
-                height: 32,
-                child: Row(
-                  children: [
-                    Expanded(child: Container(height: 1, color: Colors.black45)),
-                    const Text("  ou  "),
-                    Expanded(child: Container(height: 1, color: Colors.black45))
-                  ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: height / 3.1,
+                  child: Image.asset("assets/login.jpg"),
                 ),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
-                onPressed: () async {
-                  bool res = await FirebaseServices().signInWithGoogle();
-                  print(res);
-                  if (res) {
-                    Navigator.pushReplacement(context, MaterialPageRoute(
-                        builder: (context) => const HomeScreen()));
-                  }
-                },
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Image.network("https://ouch-cdn2.icons8.com/VGHyfDgzIiyEwg3RIll1nYupfj653vnEPRLr0AeoJ8g/rs:fit:456:456/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODg2/LzRjNzU2YThjLTQx/MjgtNGZlZS04MDNl/LTAwMTM0YzEwOTMy/Ny5wbmc.png",
-                        height: 30,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomTextfield(
+                        controller: _emailController,
+                        icon: Icons.email, label: 'E-mail',
+                        keyboard: TextInputType.emailAddress,
+                        validator: emailValidator
                       ),
-                    ),
-                    const Text("  Continuar com o Google",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: Colors.white
+                      CustomTextfield(
+                        controller: _passwordController,
+                        icon: Icons.lock, label: 'Senha',
+                        isSecret: true,
+                        validator: passwordValidator
+                      ),
+                      const ForgotPassword(),
+                      const SizedBox(height: 12),
+                      GetX<AuthController>(
+                        builder: (authController) {
+                          return CustomButton(
+                            isThinking: authController.isLoading.value,
+                            onPressed: (){
+                              //FocusScope.of(context).unfocus(); // retira o foco dos campos que automaticamente fecha o teclado.
+                              if (_formKey.currentState!.validate()){
+                                authController.loginEmail(context, email: _emailController.text, password: _passwordController.text);
+                              }
+                            },
+                            text: "Login"
+                          );
+                        }
+                      ),
+                    ]
+                  )
+                ),
+                SizedBox(
+                  height: 32,
+                  child: Row(
+                    children: [
+                      Expanded(child: Container(height: 1, color: Colors.black45)),
+                      const Text("  ou  "),
+                      Expanded(child: Container(height: 1, color: Colors.black45))
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: GetX<AuthController>(
+                    builder: (authController) {
+                      return Column(
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
+                            onPressed: (){
+                              authController.loginGoogle(context);
+                            },
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  child: Image.network("https://ouch-cdn2.icons8.com/VGHyfDgzIiyEwg3RIll1nYupfj653vnEPRLr0AeoJ8g/rs:fit:456:456/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODg2/LzRjNzU2YThjLTQx/MjgtNGZlZS04MDNl/LTAwMTM0YzEwOTMy/Ny5wbmc.png",
+                                    height: 30,
+                                  ),
+                                ),
+                                authController.isLoading2.value
+                                ? const Expanded(child: Center(child: SizedBox(width: 29, height: 29, child: CircularProgressIndicator(color: Colors.white))))
+                                : const Text("  Continuar com o Google",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.white
+                                  ),
+                                )
+                              ],
+                            )
+                          ),
+                          const SizedBox(height: 16),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                              onPressed: (){
+                                authController.smsEnviado.value = false;
+                                Get.toNamed(PagesRoutes.loginPhoneRoute);
+                              },
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 10),
+                                    child: Image.network("https://static.vecteezy.com/system/resources/thumbnails/010/829/986/small/phone-icon-in-trendy-flat-style-free-png.png",
+                                      height: 28,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const Text("   Login com nº de celular",
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text("Não tem cadastro?", style: TextStyle(fontSize: 16),),
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed(PagesRoutes.signUpRoute);
+                      },
+                      child: const Text(
+                        " Cadastrar",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16,
+                          color: Colors.blue
+                        ),
                       ),
                     )
                   ],
                 )
-              ),
-              const SizedBox(height: 16),
-              const PhoneAuthentication(),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Text("Não tem cadastro?", style: TextStyle(fontSize: 16),),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const EmailSignupScreen())
-                      );
-                    },
-                    child: const Text(
-                      " Cadastrar",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ],
+              ],
+            ),
           ),
         )
       ),

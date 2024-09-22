@@ -28,10 +28,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       //title: 'Flutter Demo',
-      //theme: ThemeData(
-      //  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      //  useMaterial3: true,
-      //),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          primary: Colors.blue,
+          seedColor: Colors.blue
+        ),
+        useMaterial3: true,
+      ),
       onReady: () async{
         //debugPrint("onReady do main");
         final authController = Get.find<AuthController>();
@@ -39,6 +42,7 @@ class MyApp extends StatelessWidget {
       },
       getPages: AppPages.pages,
       initialRoute: PagesRoutes.splashRoute,
+
       //home: LoginScreen(),
       // home: StreamBuilder(
       //   stream: FirebaseAuth.instance.authStateChanges(),

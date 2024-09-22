@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.onTap, required this.text});
-  final VoidCallback onTap;
+  const CustomButton({super.key,
+    required this.onPressed,
+    required this.text,
+    this.isThinking = false,
+  });
+  final VoidCallback onPressed;
   final String text;
+  final bool isThinking;
 
   @override
   Widget build(BuildContext context) {
@@ -12,42 +17,21 @@ class CustomButton extends StatelessWidget {
         padding: const EdgeInsets.all(8.0)
         //shape: ShapeBorder()
       ),
-      onPressed: onTap,
+      onPressed: onPressed,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(text,
+          isThinking
+          ? const SizedBox(width: 29, height: 29, child: CircularProgressIndicator(color: Colors.white))
+          : Text(text,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 18,
               color: Colors.white
             ),
           ),
         ],
-      ));
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30)
-            ),
-            color: Colors.blue
-          ),
-          child: Text(
-            text,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.white
-            ),
-          ),
-        ),
-      ),
+      )
     );
   }
 }
