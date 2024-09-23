@@ -53,6 +53,8 @@ platform :ios, '13.0'
 Depois dos packages já importados no pubspec.yaml, rodar o comando no terminal
 de dentro da pasta ios:
 pod install --repo-update
+se der algum erro tentar:
+pod update Firebase/CoreOnly
 
 ---------------------------------------------
 

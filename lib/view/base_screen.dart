@@ -1,4 +1,4 @@
-import 'package:authentication/view/home/home_screen.dart';
+import 'home/home_screen.dart';
 import 'package:flutter/material.dart';
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
