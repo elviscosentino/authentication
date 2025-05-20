@@ -23,7 +23,7 @@ Pelo menos nos métodos de autenticação, precisa ser feito o ajuste abaixo.
 No Android:
 OnBackInvokedCallback is not enabled for the application.
 Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
-<pre>```
+<pre>```xml
 <application
 android:label="MyApp"
 android:icon="@mipmap/ic_launcher"
