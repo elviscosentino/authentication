@@ -23,11 +23,12 @@ Pelo menos nos métodos de autenticação, precisa ser feito o ajuste abaixo.
 No Android:
 OnBackInvokedCallback is not enabled for the application.
 Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+<pre>```
 <application
 android:label="MyApp"
 android:icon="@mipmap/ic_launcher"
 android:enableOnBackInvokedCallback="true"> <!-- Aqui você adiciona -->
-
+```</pre>
 
 Autenticação Google ou Celular no iPhone:
 Navegue até o arquivo ios/Runner/Info.plist.
@@ -42,6 +43,12 @@ Adicione o REVERSED_CLIENT_ID ao arquivo conforme abaixo: (pegar no GoogleServic
       <string>YOUR_REVERSED_CLIENT_ID</string>
     </array>
   </dict>
+</array>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+<string>googlechrome</string>
+<string>googlechrome-universal-links</string>
+<string>googlechrome-x-callback</string>
 </array>
 
 
