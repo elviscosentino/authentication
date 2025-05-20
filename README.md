@@ -54,9 +54,10 @@ Adicione o REVERSED_CLIENT_ID ao arquivo conforme abaixo: (pegar no GoogleServic
 ```
 
 No arquivo Podfile na raiz do ios, precisa estar assim no início:  
+```text
 # Uncomment this line to define a global platform for your project  
 platform :ios, '15.6'  
-
+```
 
 Depois dos packages já importados no pubspec.yaml, rodar o comando no terminal  
 de dentro da pasta ios:  
