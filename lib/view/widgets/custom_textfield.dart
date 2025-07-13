@@ -15,7 +15,6 @@ class CustomTextfield extends StatefulWidget {
     this.onChanged,
     this.focusNode,
     this.formFieldKey,
-
     // required this.textEditingController,
     // this.isPass = false,
     // required this.hintText,

@@ -68,67 +68,118 @@ class LoginScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(child: Container(height: 1, color: Colors.black45)),
-                      const Text("  ou  "),
+                      const Text("  ou cadastrar/continuar com  "),
                       Expanded(child: Container(height: 1, color: Colors.black45))
                     ],
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
                   child: GetX<AuthController>(
                     builder: (authController) {
                       return Column(
                         children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
-                            onPressed: (){
-                              authController.loginGoogle(context);
-                            },
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8),
-                                  child: Image.network("https://ouch-cdn2.icons8.com/VGHyfDgzIiyEwg3RIll1nYupfj653vnEPRLr0AeoJ8g/rs:fit:456:456/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODg2/LzRjNzU2YThjLTQx/MjgtNGZlZS04MDNl/LTAwMTM0YzEwOTMy/Ny5wbmc.png",
-                                    height: 30,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
+                                  onPressed: (){
+                                    authController.loginGoogle(context);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: Image.asset("assets/google.png", height: 30)),
+                                      authController.isLoading2.value
+                                      ? const Expanded(child: Center(child: SizedBox(width: 29, height: 29, child: CircularProgressIndicator(color: Colors.white))))
+                                      : const SizedBox()
+                                    ],
+                                  )
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
+                                  onPressed: (){
+                                    authController.loginGoogle(context);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: Image.asset("assets/apple.png", height: 30)),
+                                      authController.isLoading2.value
+                                          ? const Expanded(child: Center(child: SizedBox(width: 29, height: 29, child: CircularProgressIndicator(color: Colors.white))))
+                                          : const Text("", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white))
+                                    ],
+                                  )
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                                  onPressed: (){
+                                    authController.smsEnviado.value = false;
+                                    Get.toNamed(PagesRoutes.loginPhoneRoute);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Padding(padding: const EdgeInsets.symmetric(vertical: 10), child: Image.asset("assets/phone.webp", height: 28, color: Colors.white)),
+                                      const Text("", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white))
+                                    ],
                                   ),
                                 ),
-                                authController.isLoading2.value
-                                ? const Expanded(child: Center(child: SizedBox(width: 29, height: 29, child: CircularProgressIndicator(color: Colors.white))))
-                                : const Text("  Continuar com o Google",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.white
-                                  ),
-                                )
-                              ],
-                            )
+                              )
+                            ],
                           ),
-                          const SizedBox(height: 16),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 16),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                              onPressed: (){
-                                authController.smsEnviado.value = false;
-                                Get.toNamed(PagesRoutes.loginPhoneRoute);
-                              },
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 10),
-                                    child: Image.network("https://static.vecteezy.com/system/resources/thumbnails/010/829/986/small/phone-icon-in-trendy-flat-style-free-png.png",
-                                      height: 28,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const Text("   Login com nº de celular",
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
+
+                          // ElevatedButton(
+                          //   style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
+                          //   onPressed: (){
+                          //     authController.loginGoogle(context);
+                          //   },
+                          //   child: Row(
+                          //     children: [
+                          //       Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: Image.asset("assets/google.png", height: 30)),
+                          //       authController.isLoading2.value
+                          //       ? const Expanded(child: Center(child: SizedBox(width: 29, height: 29, child: CircularProgressIndicator(color: Colors.white))))
+                          //       : const Text("  Google", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white))
+                          //     ],
+                          //   )
+                          // ),
+                          // const SizedBox(height: 16),
+                          // ElevatedButton(
+                          //   style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
+                          //   onPressed: (){
+                          //     authController.loginGoogle(context);
+                          //   },
+                          //   child: Row(
+                          //     children: [
+                          //       Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: Image.asset("assets/apple.png", height: 30)),
+                          //       authController.isLoading2.value
+                          //       ? const Expanded(child: Center(child: SizedBox(width: 29, height: 29, child: CircularProgressIndicator(color: Colors.white))))
+                          //       : const Text("  Apple", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white))
+                          //     ],
+                          //   )
+                          // ),
+                          // const SizedBox(height: 16),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(bottom: 16),
+                          //   child: ElevatedButton(
+                          //     style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                          //     onPressed: (){
+                          //       authController.smsEnviado.value = false;
+                          //       Get.toNamed(PagesRoutes.loginPhoneRoute);
+                          //     },
+                          //     child: Row(
+                          //       children: [
+                          //         Padding(padding: const EdgeInsets.symmetric(vertical: 10), child: Image.asset("assets/phone.webp", height: 28, color: Colors.white)),
+                          //         const Text("   Celular", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white))
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       );
                     }

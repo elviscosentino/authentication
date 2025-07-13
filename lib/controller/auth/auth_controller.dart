@@ -27,7 +27,6 @@ class AuthController extends GetxController{
       try{
         debugPrint("vai consultar banco");
         DocumentSnapshot usuarioSnapshot = await _firestore.collection('usuarios').doc(_auth.currentUser!.uid).get();
-        //DocumentSnapshot usuarioSnapshot = await _firestore.collection('users').doc('JwSC9se280XgW4XVeGAGTQQuziF2').get();
         if(usuarioSnapshot.exists) {
           debugPrint("existe");
           debugPrint("vai mapear");
@@ -35,13 +34,11 @@ class AuthController extends GetxController{
 
           debugPrint("vai printar usuario");
           debugPrint(usuario.toString());
-          //debugPrint(_auth.currentUser!.phoneNumber);
 
           user.uid = _auth.currentUser!.uid;
           user.email = _auth.currentUser!.email;
           user.name = usuario['nome'];
           user.celphone = usuario['celular'];
-          // user.distancia = usuario['distancia'].toInt();
 
           Get.offAllNamed(PagesRoutes.baseRoute);
         }else{
@@ -51,29 +48,12 @@ class AuthController extends GetxController{
       }catch(e){
         debugPrint("erro");
         debugPrint(e.toString());
-  //       signOut();
+        logout();
       }
     }else{
       debugPrint("nao autenticado, chamando tela de login...");
-  //     //utilServices.showToast(msg: 'Token nao encontrado!', isError: true);
-  //     //print("chamou signout do validate");
-  //     signOut();
-      Get.offAllNamed(PagesRoutes.loginRoute);
+      logout();
     }
-  //   //initialRoute: user.uid == null ? PagesRoutes.cepRoute : PagesRoutes.baseRoute
-  //   //} else {
-  //   //  signOut();
-  //   //}
-  //   //}
-  //   /*
-  //   print("logado!");
-  //   print(_auth.currentUser?.email);
-  //   //Get.offAllNamed(PagesRoutes.baseRoute);
-  //   //return;
-  //   user.uid = _auth.currentUser?.uid;
-  //   user.email = _auth.currentUser?.email;
-  //   print(user.email);
-  //   */
   }
 
   Future<void> signUp(BuildContext context, {required String email, required String password}) async{

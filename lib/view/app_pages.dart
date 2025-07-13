@@ -14,9 +14,6 @@ abstract class AppPages{
     GetPage(page: () => PhoneLoginScreen(), name: PagesRoutes.loginPhoneRoute),
     GetPage(page: () => EmailSignupScreen(), name: PagesRoutes.signUpRoute),
     GetPage(page: () => RegisterScreen(), name: PagesRoutes.registerUserRoute),
-    // GetPage(page: () => CadastrarCartao(), name: PagesRoutes.cadCartaoRoute),
-    // GetPage(page: () => const CartClientItemsScreen(), name: PagesRoutes.cartClientItemsRoute),
-    // GetPage(page: () => const TermosUsoScreen(), name: PagesRoutes.termosUsoRoute),
   ];
 }
 
@@ -27,9 +24,4 @@ abstract class PagesRoutes{
   static const String loginPhoneRoute = '/loginPhone';
   static const String signUpRoute = '/signup';
   static const String registerUserRoute = '/registerUser';
-  // static const String productRoute = '/product';
-  // static const String cadCartaoRoute = '/cadcartao';
-  // static const String cartClientItemsRoute = '/cartClientItems';
-  // static const String termosUsoRoute = '/termosUso';
-  // static const String politicaPrivacidadeRoute = '/politicaPrivacidade';
 }

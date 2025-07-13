@@ -2,7 +2,6 @@ import 'home/home_screen.dart';
 import 'package:flutter/material.dart';
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
-
   @override
   State<BaseScreen> createState() => _BaseScreenState();
 }

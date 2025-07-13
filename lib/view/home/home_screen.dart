@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
     // Verificar o provedor de autenticação usado
     String? photoUrl = user?.photoURL;
     String providerId = user?.providerData[0].providerId ?? "unknown";
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
